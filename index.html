@@ -226,20 +226,12 @@
 // ═══════════════════════════════════════════════
 // CONFIGURACIÓN — reemplaza estos dos valores
 // ═══════════════════════════════════════════════
-const SUPABASE_URL = 'https://nkkmecebggwhilbzmkwo.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ra21lY2ViZ2d3aGlsYnpta3dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTU5NDAsImV4cCI6MjA5NjAzMTk0MH0.jgFVq-_tqruY31aJNmUNY2ijII9lGY7EGRAncw-alzI';
+const SUPABASE_URL = 'TU_SUPABASE_URL';
+const SUPABASE_KEY = 'TU_SUPABASE_ANON_KEY';
 // ═══════════════════════════════════════════════
 
 const { createClient } = supabase;
 let sb;
-
-if (SUPABASE_URL === 'TU_SUPABASE_URL') {
-  document.querySelector('.app').insertAdjacentHTML('afterbegin',
-    '<div class="config-note">⚠️ <strong>Falta configuración:</strong> Abre el archivo <code>index.html</code> y reemplaza <code>TU_SUPABASE_URL</code> y <code>TU_SUPABASE_ANON_KEY</code> con tus credenciales de Supabase. Sigue las instrucciones del README.</div>');
-} else {
-  sb = createClient(SUPABASE_URL, SUPABASE_KEY);
-  init();
-}
 
 const GOLEADORES = ['Kylian Mbappé','Erling Haaland','Vinicius Jr.','Harry Kane','Lionel Messi','Cristiano Ronaldo','Neymar','Lautaro Martínez','Phil Foden','Pedri','Rodri','Bukayo Saka','Jude Bellingham','Mohamed Salah','Riyad Mahrez','Robert Lewandowski','Karim Benzema','Marcus Rashford','Son Heung-min','Darwin Núñez','Federico Chiesa','Rafael Leão','Victor Osimhen','Richarlison','Alexis Sánchez','Almoez Ali','Cody Gakpo','Dusan Vlahovic','Alvaro Morata','Niclas Füllkrug'];
 const PHASES_ORDER = ['Grupos','Octavos','Cuartos','Semis','Tercero','Final'];
@@ -250,6 +242,14 @@ let allParticipantes = [];
 let golistaReal = null;
 let adminLoggedIn = false;
 let currentPhase = {pron:'Grupos', part:'Grupos', admin:'Grupos'};
+
+if (SUPABASE_URL === 'TU_SUPABASE_URL') {
+  document.querySelector('.app').insertAdjacentHTML('afterbegin',
+    '<div class="config-note">⚠️ <strong>Falta configuración:</strong> Abre el archivo <code>index.html</code> y reemplaza <code>https://nkkmecebggwhilbzmkwo.supabase.co</code> y <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ra21lY2ViZ2d3aGlsYnpta3dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTU5NDAsImV4cCI6MjA5NjAzMTk0MH0.jgFVq-_tqruY31aJNmUNY2ijII9lGY7EGRAncw-alzI</code> con tus credenciales de Supabase.</div>');
+} else {
+  sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+  init();
+}
 
 function init() {
   GOLEADORES.sort();
