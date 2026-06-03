@@ -226,8 +226,8 @@
 // ═══════════════════════════════════════════════
 // CONFIGURACIÓN — reemplaza estos dos valores
 // ═══════════════════════════════════════════════
-const SUPABASE_URL = 'TU_SUPABASE_URL';
-const SUPABASE_KEY = 'TU_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://nkkmecebggwhilbzmkwo.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ra21lY2ViZ2d3aGlsYnpta3dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTU5NDAsImV4cCI6MjA5NjAzMTk0MH0.jgFVq-_tqruY31aJNmUNY2ijII9lGY7EGRAncw-alzI';
 // ═══════════════════════════════════════════════
 
 const { createClient } = supabase;
@@ -243,7 +243,7 @@ let golistaReal = null;
 let adminLoggedIn = false;
 let currentPhase = {pron:'Grupos', part:'Grupos', admin:'Grupos'};
 
-if (SUPABASE_URL === 'TU_SUPABASE_URL') {
+if (SUPABASE_URL === 'https://nkkmecebggwhilbzmkwo.supabase.co') {
   document.querySelector('.app').insertAdjacentHTML('afterbegin',
     '<div class="config-note">⚠️ <strong>Falta configuración:</strong> Abre el archivo <code>index.html</code> y reemplaza <code>https://nkkmecebggwhilbzmkwo.supabase.co</code> y <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ra21lY2ViZ2d3aGlsYnpta3dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTU5NDAsImV4cCI6MjA5NjAzMTk0MH0.jgFVq-_tqruY31aJNmUNY2ijII9lGY7EGRAncw-alzI</code> con tus credenciales de Supabase.</div>');
 } else {
@@ -511,3 +511,4 @@ function showMsg(id,txt,type){
 </script>
 </body>
 </html>
+
