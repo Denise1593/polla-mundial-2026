@@ -395,7 +395,7 @@ async function loadAll() {
     sb.from('config').select('*')
   ]);
   allPartidos   = pRes.data||[];
-  allPronosticos= pronRes.data||[];
+  allPronosticos= pronRes ||[];
   allParticipantes= partRes.data||[];
   cfg={};
   (cfgRes.data||[]).forEach(r=>{ cfg[r.clave]=r.valor; });
