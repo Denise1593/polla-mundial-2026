@@ -675,6 +675,14 @@ function exportarExcel(){
     r => r[0] === 'Eli Cavada'
   );  
   console.log(eli);
+  console.log(
+  allPronosticos
+    .filter(p => p.nombre === 'Eli Cavada')
+    .map(p => ({
+      id: p.id,
+      partido: p.partido_id
+    }))
+);
   
   XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(pronData),'Pronósticos');
   XLSX.writeFile(wb,'polla-mundial-2026.xlsx');
