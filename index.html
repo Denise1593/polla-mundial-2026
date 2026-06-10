@@ -367,7 +367,7 @@ function cambiarNombre() {
 async function loadAll() {
   const [pRes,pronRes,partRes,cfgRes] = await Promise.all([
     sb.from('partidos').select('*').order('id'),
-    sb.from('pronosticos').select('*'),
+    sb.from('pronosticos').select('*').limit(10000),
     sb.from('participantes').select('*'),
     sb.from('config').select('*')
   ]);
