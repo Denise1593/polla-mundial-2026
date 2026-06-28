@@ -685,22 +685,23 @@ function exportarExcel(){
   const rankData=[['PosiciÃ³n','Nombre','Puntos','Exactos','Ganadores','Bonuses','Goleador','CampeÃ³n','SubcampeÃ³n','3er Lugar']];
   ranking.forEach((p,i)=>rankData.push([i+1,p.nombre,p.pts,p.exact,p.win,p.bonuses.join(', '),p.golista||'',p.campeon||'',p.subcampeon||'',p.tercero||'']));
   XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(rankData),'Ranking');
-  // Hoja pronÃ³sticos
-  const partidos=allPartidos.filter(p=>p.phase.startsWith('Grupo'));
-  const header=['Participante','Goleador','CampeÃ³n','SubcampeÃ³n','3er Lugar',...partidos.map(m=>`${m.home} vs ${m.away} (${m.date||''})`)];
-  const pronData=[header];
   const pronMap={};
   allPronosticos.forEach(p=>{ pronMap[p.nombre+'_'+p.partido_id]={h:p.goles_h,a:p.goles_a}; });
-  allParticipantes.sort((a,b)=>a.nombre.localeCompare(b.nombre)).forEach(p=>{
-    const row=[p.nombre,p.golista||'',p.campeon||'',p.subcampeon||'',p.tercero||''];
-    partidos.forEach(m=>{ const pick=pronMap[p.nombre+'_'+m.id]; row.push(pick?`${pick.h}-${pick.a}`:''); });
-    pronData.push(row);
+  const fases = ['Grupo A','Grupo B','Grupo C','Grupo D','Grupo E','Grupo F','Grupo G','Grupo H','Grupo I','Grupo J','Grupo K','Grupo L','Dieciseisavos','Octavos','Cuartos','Semis','Tercero','Final'];
+  const fasesConPartidos = fases.filter(f => allPartidos.some(p=>p.phase===f));
+  fasesConPartidos.forEach(fase => {
+    const partidos = allPartidos.filter(p=>p.phase===fase);
+    if(partidos.length===0) return;
+    const header=['Participante','Goleador','Campeon','Subcampeon','3er Lugar',...partidos.map(m=>`${m.home} vs ${m.away} (${m.date||''})`)];
+    const pronData=[header];
+    allParticipantes.sort((a,b)=>a.nombre.localeCompare(b.nombre)).forEach(p=>{
+      const row=[p.nombre,p.golista||'',p.campeon||'',p.subcampeon||'',p.tercero||''];
+      partidos.forEach(m=>{ const pick=pronMap[p.nombre+'_'+m.id]; row.push(pick?`${pick.h}-${pick.a}`:''); });
+      pronData.push(row);
+    });
+    const nombreHoja = fase.length > 31 ? fase.substring(0,31) : fase;
+    XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(pronData),nombreHoja);
   });
-  
-
-  console.log(allPronosticos.length);
-  
-  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(pronData),'PronÃ³sticos');
   XLSX.writeFile(wb,'polla-mundial-2026.xlsx');
 }
 
@@ -723,3 +724,4 @@ init();
 </script>
 </body>
 </html>
+
